@@ -1,6 +1,7 @@
 import { WebClient } from '@slack/web-api';
 import { CoreMessage } from 'ai'
 import crypto from 'crypto'
+import { Message } from 'langbase';
 
 const signingSecret = process.env.SLACK_SIGNING_SECRET!
 
@@ -105,6 +106,45 @@ export async function getThread(
 
   return result;
 }
+
+
+export async function getThreadLangBase(
+  channel_id: string,
+  thread_ts: string,
+  botUserId: string,
+): Promise<Message[]> {
+  const { messages } = await client.conversations.replies({
+    channel: channel_id,
+    ts: thread_ts,
+    limit: 50,
+  });
+
+  // Ensure we have messages
+
+  if (!messages) throw new Error("No messages found in thread");
+
+  const result = messages
+    .map((message) => {
+      const isBot = !!message.bot_id;
+      if (!message.text) return null;
+
+      // For app mentions, remove the mention prefix
+      // For IM messages, keep the full text
+      let content = message.text;
+      if (!isBot && content.includes(`<@${botUserId}>`)) {
+        content = content.replace(`<@${botUserId}> `, "");
+      }
+
+      return {
+        role: isBot ? "assistant" : "user",
+        content: content,
+      } as Message;
+    })
+    .filter((msg): msg is Message => msg !== null);
+
+  return result;
+}
+
 
 export const getBotId = async () => {
   const { user_id: botUserId } = await client.auth.test();

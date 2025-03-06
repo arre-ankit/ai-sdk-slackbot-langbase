@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "start": "node dist/index.js"
+    "start": "npm run build && node dist/index.js"
   },
   "keywords": [],
   "author": "",
@@ -16,10 +16,11 @@
     "@vercel/functions": "^2.0.0",
     "ai": "^4.1.46",
     "exa-js": "^1.4.10",
+    "langbase": "^1.1.38",
     "zod": "^3.24.2"
   },
   "devDependencies": {
     "@types/node": "^20.11.17",
-    "typescript": "^5.3.3"
+    "typescript": "^5.8.2"
   }
 }

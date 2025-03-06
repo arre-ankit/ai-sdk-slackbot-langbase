@@ -1,11 +1,8 @@
 import type { SlackEvent } from "@slack/web-api";
-import {
-  assistantThreadMessage,
-  handleNewAssistantMessage,
-} from "../lib/handle-messages";
 import { waitUntil } from "@vercel/functions";
-import { handleNewAppMention } from "../lib/handle-app-mention";
 import { verifyRequest, getBotId } from "../lib/slack-utils";
+import { handleNewAppMentionLangBase } from '../lib/handle-app-mention-langbase'
+import {assistantThreadMessageLangbase, handleNewAssistantMessageLangbase} from '../lib/handle-message-langbase'
 
 export async function POST(request: Request) {
   const rawBody = await request.text();
@@ -25,11 +22,11 @@ export async function POST(request: Request) {
     const event = payload.event as SlackEvent;
 
     if (event.type === "app_mention") {
-      waitUntil(handleNewAppMention(event, botUserId));
+      waitUntil(handleNewAppMentionLangBase(event, botUserId));
     }
 
     if (event.type === "assistant_thread_started") {
-      waitUntil(assistantThreadMessage(event));
+      waitUntil(assistantThreadMessageLangbase(event));
     }
 
     if (
@@ -40,7 +37,7 @@ export async function POST(request: Request) {
       !event.bot_profile &&
       event.bot_id !== botUserId
     ) {
-      waitUntil(handleNewAssistantMessage(event, botUserId));
+      waitUntil(handleNewAssistantMessageLangbase(event, botUserId));
     }
 
     return new Response("Success!", { status: 200 });
