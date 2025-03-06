@@ -1,7 +1,4 @@
-import { openai } from "@ai-sdk/openai";
-import { CoreMessage, generateText, tool } from "ai";
-import { z } from "zod";
-import { exa, langbase } from "./utils";
+import { langbase } from "./utils";
 import { Message } from "langbase";
 
 
@@ -13,12 +10,10 @@ export const generateResponseLangBase = async (
     const response1 = await langbase.pipes.run({
 		name: 'ai-chatbot',
 		stream: false,
-		messages
+		messages,
 	});
 
   // Convert markdown to Slack mrkdwn format
   console.log(response1.completion)
   return response1.completion;
 };
-
-generateResponseLangBase([{role: 'user', content: 'My company is called Langbase'}])
