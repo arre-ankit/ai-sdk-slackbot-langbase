@@ -8,7 +8,7 @@ export const generateResponseLangBase = async (
 ) => {
 
     const response1 = await langbase.pipes.run({
-		name: 'ai-chatbot',
+		name: 'support-answer-agent',
 		stream: false,
 		messages
 	});
