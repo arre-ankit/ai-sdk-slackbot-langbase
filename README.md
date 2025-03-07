@@ -1,39 +1,12 @@
-# AI SDK Slackbot
+# BASEAI Slackbot
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fnicoalbanese%2Fai-sdk-slackbot&env=SLACK_BOT_TOKEN,SLACK_SIGNING_SECRET,OPENAI_API_KEY,EXA_API_KEY&envDescription=API%20keys%20needed%20for%20application&envLink=https%3A%2F%2Fgithub.com%2Fnicoalbanese%2Fai-sdk-slackbot%3Ftab%3Dreadme-ov-file%234-set-environment-variables&project-name=ai-sdk-slackbot)
+An AI-powered chatbot for Slack powered by the [LangBase](https://langbase.com/docs).
 
-An AI-powered chatbot for Slack powered by the [AI SDK by Vercel](https://sdk.vercel.ai/docs).
-
-## Features
-
-- Integrates with [Slack's API](https://api.slack.com) for easy Slack communication
-- Use any LLM with the AI SDK ([easily switch between providers](https://sdk.vercel.ai/providers/ai-sdk-providers))
-- Works both with app mentions and as an assistant in direct messages
-- Maintains conversation context within both threads and direct messages
-- Built-in tools for enhanced capabilities:
-  - Real-time weather lookup
-  - Web search (powered by [Exa](https://exa.ai))
-- Easily extensible architecture to add custom tools (e.g., knowledge search)
 
 ## Prerequisites
 
-- [Node.js](https://nodejs.org/) 18+ installed
-- Slack workspace with admin privileges
-- [OpenAI API key](https://platform.openai.com/api-keys)
-- [Exa API key](https://exa.ai) (for web search functionality)
-- A server or hosting platform (e.g., [Vercel](https://vercel.com)) to deploy the bot
 
-## Setup
-
-### 1. Install Dependencies
-
-```bash
-npm install
-# or
-pnpm install
-```
-
-### 2. Create a Slack App
+### Create a Slack App
 
 1. Go to [https://api.slack.com/apps](https://api.slack.com/apps) and click "Create New App"
 2. Choose "From scratch" and give your app a name
